@@ -66,5 +66,30 @@ export default function usersRoutes(db) {
       client.release();
     }
   });
+
+  router.get("/:id/channels", async (req, res) => {
+    const userId = req.params.id;
+    const client = await db.connect();
+    try {
+      const channelsRes = await client.query(
+        `SELECT * FROM "CHANNEL" WHERE channel_owner_id = $1`,
+        [userId]
+      );
+      res.status(200).json({
+        success: true,
+        channels: channelsRes.rows,
+      });
+    } catch (error) {
+      console.error("Error fetching channels: ", error);
+      res.status(500).json({
+        success: false,
+        message: "Error fetching channels",
+        error: error.message,
+      });
+    } finally {
+      client.release();
+    }
+  });
+
   return router;
 }

@@ -45,5 +45,44 @@ export default function channelsRoutes(db) {
       client.release();
     }
   });
+
+  router.get("/:id/channels", async (req, res) => {
+    const userId = parseInt(req.params.id);
+
+    if (isNaN(userId) || userId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid user ID",
+      });
+    }
+
+    const client = await db.connect();
+    try {
+      const result = await client.query(
+        `
+		SELECT c.channel_id, c.channel_name, c.description, c.date_created
+		FROM "SUBSCRIPTIONS" s
+		JOIN "CHANNEL" c ON s.channel_id = c.channel_id
+		WHERE s.user_id = $1
+	  `,
+        [userId]
+      );
+
+      res.status(200).json({
+        success: true,
+        channels: result.rows,
+      });
+    } catch (error) {
+      console.error("Error fetching user channels:", error);
+      res.status(500).json({
+        success: false,
+        message: "Could not retrieve channels",
+        error: error.message,
+      });
+    } finally {
+      client.release();
+    }
+  });
+
   return router;
 }
