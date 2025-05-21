@@ -1,0 +1,12 @@
+{
+"name":"sql-bulletin-exam","version":"1.0.0","description":"Backend API for bulletin-exam","main":"main.js", "type": "module",
+  "dependencies": {
+    "express": "^5.1.0",
+	"express-session": "^1.17.3",
+	"connect-mongo": "^5.2.0",
+	"mongoose": "^7.4.0",
+	"dotenv": "^16.0.3",
+	"bcrypt": "^5.1.0",
+	"jsonwebtoken": "^9.0.0"
+  }
+}
