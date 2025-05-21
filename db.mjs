@@ -104,6 +104,7 @@ async function setupDatabase() {
     await client.query(`ROLLBACK`);
   } finally {
     client.release();
+    await db.end();
   }
 }
 setupDatabase();

@@ -6,7 +6,9 @@ dotenv.config();
 
 // Här kommer vi importera våra router
 import usersRoutes from "./routes/users.js";
-// import Routes from "./routes/";
+import channelsRoutes from "./routes/channels.js";
+import subscriptionsRoutes from "./routes/subscriptions.js";
+import messagesRoutes from "./routes/messages.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -32,11 +34,11 @@ const db = new Pool({
   }
 })();
 
-// Koppla våran user route
-app.use(usersRoutes(db));
-
-// Koppla våran . route
-// app.use("/", Routes(db));
+// Koppla våra routes
+app.use("/users", usersRoutes(db));
+app.use("/channels", channelsRoutes(db));
+app.use("/subscription", subscriptionsRoutes(db));
+app.use("/messages", messagesRoutes(db));
 
 // Start the server
 app.listen(port, () => {

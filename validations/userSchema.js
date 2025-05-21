@@ -24,3 +24,5 @@ const subscriptionSchema = Joi.object({
   user_id: Joi.number().integer().positive().required(),
   channel_id: Joi.number().integer().positive().required(),
 });
+
+export { userSchema, channelSchema, messageSchema, subscriptionSchema };

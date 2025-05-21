@@ -5,10 +5,9 @@ import { userSchema } from "../validations/userSchema.js";
 export default function usersRoutes(db) {
   const router = Router();
 
-  router.post("/users", async (req, res) => {
+  router.post("/", async (req, res) => {
     const { error, value } = userSchema.validate(req.body);
 
-    // Validate input
     if (error) {
       return res.status(400).json({
         success: false,

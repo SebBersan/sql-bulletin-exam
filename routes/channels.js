@@ -1,18 +1,21 @@
 import { Router } from "express";
+import { channelSchema } from "../validations/userSchema.js";
 
-export default function channelRoutes(db) {
+export default function channelsRoutes(db) {
   const router = Router();
 
-  router.post("/channels", async (req, res) => {
-    const { channel_name, description, channel_owner_id } = req.body;
+  router.post("/", async (req, res) => {
+    console.log("Channels route is being hit");
+    const { error, value } = channelSchema.validate(req.body);
 
-    // Validate input
-    if (!channel_name || !channel_owner_id) {
+    if (error) {
       return res.status(400).json({
         success: false,
-        message: "Channel name and owner ID are required",
+        message: error.details[0].message,
       });
     }
+
+    const { channel_name, description, channel_owner_id } = value;
 
     const client = await db.connect();
     try {
