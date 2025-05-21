@@ -16,7 +16,7 @@ const channelSchema = Joi.object({
 
 const messageSchema = Joi.object({
   content: Joi.string().min(1).required(),
-  author_id: Joi.number().integer().positive().allow(null).optional(), // Can be null if anonymous
+  user_id: Joi.number().integer().positive().allow(null).optional(), // Can be null if anonymous
   channel_id: Joi.number().integer().positive().required(),
 });
 

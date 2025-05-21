@@ -50,11 +50,11 @@ async function setupDatabase() {
 				content TEXT NOT NULL,
 				date_created TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
 				message_updated TIMESTAMPTZ,
-				author_id INT,
+				user_id INT,
 				channel_id INT NOT NULL,
 
-					CONSTRAINT fk_author
-						FOREIGN KEY(author_id)
+					CONSTRAINT fk_user
+						FOREIGN KEY(user_id)
 						REFERENCES "USER"(user_id)
 						ON DELETE SET NULL, -- Om en användare raderas, sätts författaren till NULL (anonymt meddelande)
 
@@ -88,7 +88,7 @@ async function setupDatabase() {
     await client.query(
       `CREATE INDEX IF NOT EXISTS idx_channel_owner_id ON "CHANNEL"(channel_owner_id);`
     );
-    await client.query(`CREATE INDEX IF NOT EXISTS idx_messages_author_id ON "MESSAGES"(author_id);
+    await client.query(`CREATE INDEX IF NOT EXISTS idx_messages_user_id ON "MESSAGES"(user_id);
 ;`);
     await client.query(
       `CREATE INDEX IF NOT EXISTS idx_messages_channel_id ON "MESSAGES"(channel_id);`

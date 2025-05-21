@@ -45,4 +45,5 @@ export default function channelsRoutes(db) {
       client.release();
     }
   });
+  return router;
 }

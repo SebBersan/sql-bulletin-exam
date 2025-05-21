@@ -45,4 +45,5 @@ export default function messagesRoutes(db) {
       client.release();
     }
   });
+  return router;
 }

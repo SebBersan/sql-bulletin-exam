@@ -5,6 +5,8 @@ export default function subscriptionsRoutes(db) {
   const router = Router();
 
   router.post("/", async (req, res) => {
+    console.log("test subscriptions.js");
+
     // Validate input
     const { error, value } = subscriptionSchema.validate(req.body);
 
@@ -45,4 +47,5 @@ export default function subscriptionsRoutes(db) {
       client.release();
     }
   });
+  return router;
 }

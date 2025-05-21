@@ -35,9 +35,13 @@ const db = new Pool({
 })();
 
 // Koppla våra routes
+console.log("Setting up routes for /users");
 app.use("/users", usersRoutes(db));
+console.log("Setting up routes for /channels");
 app.use("/channels", channelsRoutes(db));
-app.use("/subscription", subscriptionsRoutes(db));
+console.log("Setting up routes for /subscriptions");
+app.use("/subscriptions", subscriptionsRoutes(db));
+console.log("Setting up routes for /messages");
 app.use("/messages", messagesRoutes(db));
 
 // Start the server
