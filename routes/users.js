@@ -1,19 +1,22 @@
 import { Router } from "express";
 // import bcrypt from "bcryptjs";
+import { userSchema } from "../validations/userSchema.js";
 
 export default function usersRoutes(db) {
   const router = Router();
 
   router.post("/users", async (req, res) => {
-    const { username, email, password } = req.body;
+    const { error, value } = userSchema.validate(req.body);
 
     // Validate input
-    if (!username || !email || !password) {
+    if (error) {
       return res.status(400).json({
         success: false,
-        message: "All fields are required",
+        message: error.details[0].message,
       });
     }
+
+    const { username, email, password } = value;
 
     const client = await db.connect();
     try {
@@ -23,10 +26,17 @@ export default function usersRoutes(db) {
         [username, email]
       );
       if (existingUser.rows.length > 0) {
-        return res.status(400).json({
-          success: false,
-          message: "User already exists",
-        });
+        if (existingUser.rows[0].username === username) {
+          return res.status(400).json({
+            success: false,
+            message: "Username already taken",
+          });
+        } else if (existingUser.rows[0].email === email) {
+          return res.status(400).json({
+            success: false,
+            message: "Email already registered",
+          });
+        }
       }
 
       //   const passwordHash = await bcrypt.hash(password, 10);
