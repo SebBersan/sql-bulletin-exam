@@ -72,7 +72,7 @@ export default function channelsRoutes(db) {
 
       res.status(200).json({
         success: true,
-        channels: result.rows,
+        messages: result.rows,
       });
     } catch (error) {
       console.error("Error fetching user messages:", error);
