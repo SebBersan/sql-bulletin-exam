@@ -16,7 +16,7 @@ Användare kan registrera sig, skapa kanaler, prenumerera på dem, posta meddela
 1. **Kloning & Navigering**
    ```bash
     git clone https://github.com/SebBersan/sql-bulletin-exam.git
-    cd sql-bulletin-exam.git
+    cd sql-bulletin-exam
    ```
 
 2. **Installera beroenden**
