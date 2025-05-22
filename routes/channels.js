@@ -46,7 +46,7 @@ export default function channelsRoutes(db) {
     }
   });
 
-  router.get("/:id/channels", async (req, res) => {
+  router.get("/:id/messages", async (req, res) => {
     const userId = parseInt(req.params.id);
 
     if (isNaN(userId) || userId <= 0) {
@@ -60,10 +60,12 @@ export default function channelsRoutes(db) {
     try {
       const result = await client.query(
         `
-		SELECT c.channel_id, c.channel_name, c.description, c.date_created
-		FROM "SUBSCRIPTIONS" s
-		JOIN "CHANNEL" c ON s.channel_id = c.channel_id
-		WHERE s.user_id = $1
+		SELECT m.message_id, m.content, m.date_created, u.username
+		FROM "MESSAGES" m
+		JOIN "USER" u ON m.user_id = u.user_id
+		WHERE m.user_id = $1
+		ORDER BY m.date_created ASC	
+
 	  `,
         [userId]
       );
@@ -73,10 +75,10 @@ export default function channelsRoutes(db) {
         channels: result.rows,
       });
     } catch (error) {
-      console.error("Error fetching user channels:", error);
+      console.error("Error fetching user messages:", error);
       res.status(500).json({
         success: false,
-        message: "Could not retrieve channels",
+        message: "Could not retrieve messages",
         error: error.message,
       });
     } finally {
