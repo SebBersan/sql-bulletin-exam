@@ -5,7 +5,7 @@ Användare kan registrera sig, skapa kanaler, prenumerera på dem, posta meddela
 
 ## Video Presentation
 
-▶[Se presentation på YouTube](YT LINK)
+▶[Se presentation på YouTube](https://youtu.be/QUEkKXnQIhs)
 
 ---
 
