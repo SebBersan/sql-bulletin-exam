@@ -43,11 +43,11 @@ Användare kan registrera sig, skapa kanaler, prenumerera på dem, posta meddela
 
 ---
 ## ER-Diagram 
+ER-Diagram entiteter och relationer
 ---
-### ER-Diagram entiteter och relationer
 ![ER-diagram](https://media.discordapp.net/attachments/1360604236886573210/1374115029095288853/image.png?ex=68302b98&is=682eda18&hm=4e0a8d67e77a9b7c651800fc4e0e5371cf9bcc8549c5d4d8ac2349e4aee5aa11)
----
 
+---
 ## API-dokumentation
 
 Alla exempel använder JSON som in- och utdataformat.
