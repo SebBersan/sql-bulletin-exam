@@ -24,7 +24,7 @@ Användare kan registrera sig, skapa kanaler, prenumerera på dem, posta meddela
     npm install
    ```
 
-3. **Skapa .env-fil**
+3. **Editera .env-fil**
    Editera följande i `.env` filen:
    ```env
     DB_USER=xxxx
